@@ -1,0 +1,35 @@
+{
+  "name": "itholics/oxid",
+  "description": "This module contains practical functions for use within oxid.",
+  "type": "oxideshop-module",
+  "version": "0.1.0",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "oxid",
+    "modules",
+    "eShop",
+    "basic",
+    "utils",
+    "url"
+  ],
+  "authors": [
+    {
+      "name": "ITholics DEV TEam",
+      "email": "info@itholics.de"
+    }
+  ],
+  "extra": {
+    "oxideshop": {
+      "target-directory": "ith_modules/oxid"
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "bramus/monolog-colored-line-formatter": "~3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "ITholics\\Oxid\\": "./"
+    }
+  }
+}
