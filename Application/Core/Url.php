@@ -1,17 +1,4 @@
 <?php
-/**
- * This Software is the property of ITholics GmbH and is protected
- * by copyright law - it is NOT Freeware.
- *
- * Any unauthorized use of this software without a valid license key
- * is a violation of the license agreement and will be prosecuted by
- * civil and criminal law.
- *
- * @link          http://www.itholics.de
- * @copyright (C) ITholics GmbH 2011-2022
- * @author        ITholics GmbH <oxid@itholics.de>
- * @author        Gabriel Peleskei <gp@itholics.de>
- */
 
 namespace ITholics\Oxid\Application\Core;
 
@@ -645,13 +632,13 @@ class Url implements \JsonSerializable, \ArrayAccess
                 return http_build_query($this->_query, '', null, PHP_QUERY_RFC3986) ?: null;
             case 'request':
                 $uri = '';
-                if ($host = $_SERVER['HTTP_HOST'] ?: null) {
+                if ($host = $_SERVER['HTTP_HOST'] ?? null) {
                     $uri .= '//' . $host;
                 }
-                if ($port = $_SERVER['HTTP_PORT'] and $port != static::DEFAULT_PORT) {
+                if ($port = $_SERVER['HTTP_PORT'] ?? null and $port != static::DEFAULT_PORT) {
                     $uri .= ':' . $port;
                 }
-                if ($path = $_SERVER['REQUEST_URI']) {
+                if ($path = $_SERVER['REQUEST_URI'] ?? null) {
                     $uri .= $path;
                 }
                 $this->extract($uri);

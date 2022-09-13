@@ -30,6 +30,7 @@ use Monolog\Handler\StreamHandler;
 $logger = Logger::getInstance('CLI');
 $formatter = Logger\ColoredLineFormatter::getInstance()->withJsonOptions(JSON_PRETTY_PRINT);
 $handler = new StreamHandler(STDOUT);
+$handler->setFormatter($formatter);
 $logger->pushHandler($handler);
 // add extra file logger for errors
 $formatter2 = Logger\LineFormatter::getInstance()->withJsonOptions(JSON_PRETTY_PRINT);
@@ -40,14 +41,16 @@ $logger->pushHandler($fileHandler);
 
 ### Output example to oxieshop.log
 
-    [2022-08-30 15:42:32] Dev.ERROR: 
-        [ ITholics\Oxid\Application\Core\Adapter\Config::init ] >> *Failed to initialize config from JSON* [JsonException] (4) > Syntax error (/var/www/html/source/modules/ith_modules/oxid/Application/Core/Adapter/Config.php/120)
-            #0 /var/www/html/source/modules/ith_modules/oxid/Application/Core/Adapter/Config.php(120): json_decode('', true, 512, 4194304)
-            #1 /var/www/html/source/modules/ith_modules/oxid/Application/Core/Adapter/Config.php(69): ITholics\Oxid\Application\Core\Adapter\Config->init()
-            #2 /var/www/html/vendor/oxid-esales/oxideshop-ce/source/Core/UtilsObject.php(231): ITholics\Oxid\Application\Core\Adapter\Config->__construct(1)
-            #3 /var/www/html/source/oxfunctions.php(104): OxidEsales\EshopCommunity\Core\UtilsObject->oxNew('conf', 1)
-            #4 /var/www/html/source/modules/ith_modules/oxid/Application/Core/Adapter/Config.php(84): oxNew('Conf', 1)
-            #5 /var/www/html/source/modules/ith_modules/oxid/bin/url.php(45): ITholics\Oxid\Application\Core\Adapter\Config::getInstance(1)
+    [2022-09-13 16:29:58] Dev.ERROR: 
+        [ OxidEsales\EshopCommunity\Application\Controller\StartController::render ]
+            >> URL="//oxid6.localhost/index.php"
+            >> *nooo, please help* [Exception] (0) > nope (/var/www/html/vendor/oxid-esales/oxideshop-ce/source/Application/Controller/StartController.php/114)
+            #0 /var/www/html/vendor/oxid-esales/oxideshop-ce/source/Core/ShopControl.php(471): OxidEsales\EshopCommunity\Application\Controller\StartController->render()
+            #1 /var/www/html/vendor/oxid-esales/oxideshop-ce/source/Core/ShopControl.php(359): OxidEsales\EshopCommunity\Core\ShopControl->_render(Object(OxidEsales\Eshop\Application\Controller\StartController))
+            #2 /var/www/html/vendor/oxid-esales/oxideshop-ce/source/Core/ShopControl.php(282): OxidEsales\EshopCommunity\Core\ShopControl->formOutput(Object(OxidEsales\Eshop\Application\Controller\StartController))
+            #3 /var/www/html/vendor/oxid-esales/oxideshop-ce/source/Core/ShopControl.php(142): OxidEsales\EshopCommunity\Core\ShopControl->_process('OxidEsales\\Esho...', NULL, NULL, NULL)
+            #4 /var/www/html/vendor/oxid-esales/oxideshop-ce/source/Core/Oxid.php(27): OxidEsales\EshopCommunity\Core\ShopControl->start()
+            #5 /var/www/html/source/index.php(16): OxidEsales\EshopCommunity\Core\Oxid::run()
             #6 {main} {
         "shopId": 1
     } 

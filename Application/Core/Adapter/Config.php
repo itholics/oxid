@@ -1,30 +1,15 @@
 <?php
-/**
- * This Software is the property of ITholics GmbH and is protected
- * by copyright law - it is NOT Freeware.
- *
- * Any unauthorized use of this software without a valid license key
- * is a violation of the license agreement and will be prosecuted by
- * civil and criminal law.
- *
- * @link          http://www.itholics.de
- * @copyright (C) ITholics GmbH 2011-2022
- * @author        ITholics GmbH <oxid@itholics.de>
- * @author        Gabriel Peleskei <gp@itholics.de>
- */
 
 namespace ITholics\Oxid\Application\Core\Adapter;
 
 use Doctrine\DBAL\Exception;
 use ITholics\Oxid\Application\Core\Utils;
-use ITholics\Oxid\Application\Shared\StaticInstanceTrait;
 use OxidEsales\Eshop\Core\Registry;
 use function is_int;
 use function is_object;
 use function is_string;
 use function json_decode;
 use function method_exists;
-use function sprintf;
 use const JSON_THROW_ON_ERROR;
 
 /**

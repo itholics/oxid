@@ -1,27 +1,12 @@
 <?php
-/**
- * This Software is the property of ITholics GmbH and is protected
- * by copyright law - it is NOT Freeware.
- *
- * Any unauthorized use of this software without a valid license key
- * is a violation of the license agreement and will be prosecuted by
- * civil and criminal law.
- *
- * @link          http://www.itholics.de
- * @copyright (C) ITholics GmbH 2011-2022
- * @author        ITholics GmbH <oxid@itholics.de>
- * @author        Gabriel Peleskei <gp@itholics.de>
- */
 
 namespace ITholics\Oxid\Application\Core;
 
-use Doctrine\DBAL\Connection;
+use ITholics\Oxid\Application\Core\IO\Database\Provider;
 use ITholics\Oxid\Application\Exception\Exception;
 use ITholics\Oxid\Application\Shared\StaticInstanceTrait;
-use oxFileException;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\Eshop\Core\ViewConfig;
-use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use function array_map;
 use function count;
 use function debug_backtrace;
@@ -105,11 +90,11 @@ class Utils
         }
         $content = array_map(static function ($line) use ($padSize, $fill) {
             $padding = '';
-            while(abs($padSize)) {
+            while (abs($padSize)) {
                 $padding .= $fill;
                 --$padSize;
             }
-            return $padding.$line;
+            return $padding . $line;
         }, $content);
         return implode(PHP_EOL, $content);
     }
@@ -127,7 +112,7 @@ class Utils
         if ($e instanceof Exception) {
             $more = sprintf("\n#method=[%s] #internalCode=[%s]", $e->getMethod(), $e->getInternalCode());
         }
-        $f = array_map(static function(string $line) { return str_pad($line, 2, "\t", STR_PAD_LEFT); }, explode(PHP_EOL, $e->getTraceAsString()));
+        $f = array_map(static function (string $line) { return str_pad($line, 2, "\t", STR_PAD_LEFT); }, explode(PHP_EOL, $e->getTraceAsString()));
         $f = implode(PHP_EOL, $f);
         return sprintf("[%s] (%d) > %s (%s/%d)%s%s%s",
             get_class($e),
@@ -141,8 +126,8 @@ class Utils
         );
     }
     
-    public function getDb(): Connection
+    public function getDb(): IO\Database\DatabaseInterface
     {
-        return ContainerFactory::getInstance()->getContainer()->get(Connection::class);
+        return Provider::getInstance()->get();
     }
 }

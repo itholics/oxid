@@ -1,17 +1,4 @@
 <?php
-/**
- * This Software is the property of ITholics GmbH and is protected
- * by copyright law - it is NOT Freeware.
- *
- * Any unauthorized use of this software without a valid license key
- * is a violation of the license agreement and will be prosecuted by
- * civil and criminal law.
- *
- * @link          http://www.itholics.de
- * @copyright (C) ITholics GmbH 2011-2022
- * @author        ITholics GmbH <oxid@itholics.de>
- * @author        Gabriel Peleskei <gp@itholics.de>
- */
 
 namespace ITholics\Oxid\Application\Core;
 
@@ -57,7 +44,11 @@ class Logger extends \Monolog\Logger
             $ex      = $this->formatException($ex);
             $message = $message ? "*{$message}* " . $ex : $ex;
         }
-        return parent::addRecord($level, sprintf("\n\t[ %s ] >> %s", $callee, $message), $context);
+        $uri = ' ';
+        if ($url = Url::getRequestInstance()->url) {
+            $uri = sprintf("\n\t\t>> URL=\"%s\"\n\t\t", $url);
+        }
+        return parent::addRecord($level, sprintf("\n\t[ %s ]%s>> %s", $callee, $uri, $message), $context);
     }
     
     /**

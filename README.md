@@ -7,6 +7,7 @@ Tools & Utils for oxid modules.
 - [Logger](docs/core/Logger.md)
 - [Options](docs/core/adapter/Options.md)
 - [Config](docs/core/adapter/Config.md)
+- [Database](docs/core/io/database/Database.md)
 
 ## Smarty
 - [Access](docs/smarty/Access.md)
